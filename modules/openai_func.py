@@ -38,11 +38,21 @@ def get_usage(openai_api_key):
                 "total_available") else 0
             total_used = response.json().get("total_used") if response.json().get(
                 "total_used") else 0
+            usage_percent = round(total_used / (total_used+balance) * 100, 2)
         except Exception as e:
             logging.error(f"API使用情况解析失败:"+str(e))
             balance = 0
             total_used=0
-        return f"**API使用情况**（已用/余额）\u3000{total_used}$ / {balance}$"
+        return f"""\
+        <b>API使用情况</b>
+        <div class="progress-bar">
+		<div class="progress" style="width: {usage_percent}%;">
+			<span class="progress-text">{usage_percent}%</span>
+		</div>
+	    </div>
+        <div style="display: flex; justify-content: space-between;"><span>${total_used}</span><span>${balance}</span></div>
+        """
+   
     except requests.exceptions.ConnectTimeout:
         status_text = standard_error_msg + connection_timeout_prompt + error_retrieve_prompt
         return status_text

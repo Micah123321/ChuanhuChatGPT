@@ -37,13 +37,34 @@ footer {
 
 /* usage_display */
 #usage_display {
-    height: 1em;
-}
-#usage_display p{
+    max-height: 4em;
     padding: 0 1em;
+}
+#usage_display p, #usage_display span {
     font-size: .85em;
-    font-family: monospace;
     color: var(--body-text-color-subdued);
+}
+.progress-bar {
+    background-color: var(--input-background-fill);;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress {
+    background-color: var(--block-title-background-fill);;
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    text-align: right;
+    transition: width 0.5s ease-in-out;
+}
+.progress-text {
+    /* color: white; */
+    color: var(--color-accent) !important;
+    font-size: 1em !important;
+    font-weight: bold;
+    padding-right: 10px;
+    line-height: 20px;
 }
 /* list */
 ol:not(.options), ul:not(.options) {
